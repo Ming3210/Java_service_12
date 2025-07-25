@@ -1,0 +1,42 @@
+✅ JWT là gì?
+JWT (JSON Web Token) là một chuẩn mã hóa dùng để truyền thông tin an toàn giữa các bên dưới dạng đối tượng JSON. Thông tin này được ký số (bằng HMAC hoặc RSA), đảm bảo tính toàn vẹn và xác thực.
+
+✅ Điểm mạnh của JWT:
+Tự chứa: Chứa đầy đủ thông tin xác thực.
+
+Stateless: Không cần lưu trên server.
+
+Hiệu suất cao: Giảm truy cập DB.
+
+Dễ tích hợp: Phù hợp cho SSO, API, microservices.
+
+❌ Điểm yếu của JWT:
+Không thể thu hồi dễ nếu bị lộ.
+
+Token dài, tốn băng thông.
+
+Nếu rò rỉ khóa ký, có thể bị giả mạo.
+
+Không thể chỉnh sửa nội dung sau khi phát hành.
+
+✅ Cấu trúc JWT gồm 3 phần:
+
+Header.Payload.Signature
+Header: thông tin thuật toán ký (vd: HS256).
+
+Payload: chứa dữ liệu (claims), ví dụ: user id, role, exp.
+
+Signature: dùng để xác thực token có bị chỉnh sửa không.
+
+✅ Ứng dụng phổ biến của JWT:
+Xác thực người dùng (Authentication).
+
+Phân quyền truy cập (Authorization).
+
+Đăng nhập một lần (SSO).
+
+Giao tiếp giữa các microservices.
+
+Truyền dữ liệu an toàn phía client.
+
+Nếu bạn cần nội dung dạng slide, PDF hay markdown, mình có thể hỗ trợ chuyển đổi nhanh chóng.

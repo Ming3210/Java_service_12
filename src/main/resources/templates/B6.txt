@@ -1,0 +1,52 @@
+
+📄 Ví dụ response server gửi về khi gặp lỗi
+1. Token hết hạn
+
+{
+  "success": false,
+  "message": "Token đã hết hạn. Vui lòng đăng nhập lại.",
+  "code": "TOKEN_EXPIRED"
+}
+2. Sai chữ ký
+
+{
+  "success": false,
+  "message": "Token không hợp lệ (sai chữ ký).",
+  "code": "INVALID_SIGNATURE"
+}
+3. Token sai định dạng
+
+{
+  "success": false,
+  "message": "Token sai định dạng hoặc không đầy đủ.",
+  "code": "MALFORMED_TOKEN"
+}
+4. Token chưa hiệu lực
+
+{
+  "success": false,
+  "message": "Token chưa đến thời gian hiệu lực.",
+  "code": "TOKEN_NOT_ACTIVE"
+}
+5. Không gửi token
+
+{
+  "success": false,
+  "message": "Thiếu token trong yêu cầu.",
+  "code": "TOKEN_MISSING"
+}
+🔄 Hành động phù hợp cho client
+Trường hợp lỗi	Hành động đề xuất trên Client
+Token hết hạn	👉 Hiển thị thông báo, chuyển hướng về trang login.
+Sai chữ ký / giả mạo	👉 Thông báo lỗi bảo mật, xóa token, yêu cầu đăng nhập lại.
+Sai định dạng / lỗi khác	👉 Hiển thị lỗi hệ thống, không tiếp tục gọi API.
+Token chưa hiệu lực	👉 Thử lại sau vài giây (nếu ứng dụng có delay hợp lệ).
+Token bị thiếu	👉 Gửi lại token nếu lưu trong bộ nhớ, hoặc chuyển hướng login.
+Token bị thu hồi (blacklist)	👉 Đăng xuất ngay lập tức, xóa token, chuyển hướng login.
+
+📌 Lưu ý bảo mật:
+Không hiển thị nội dung chi tiết lỗi với người dùng cuối (nên log phía client/dev).
+
+Luôn sử dụng HTTPS để bảo vệ token khỏi bị đánh cắp.
+
+Có thể kết hợp JWT với refresh token để hạn chế đăng xuất đột ngột.

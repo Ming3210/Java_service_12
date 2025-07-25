@@ -1,0 +1,51 @@
+✅ Quy trình xác thực JWT:
+🔁 Bước 1: Client gửi yêu cầu đăng nhập
+Client (trình duyệt/mobile app) gửi thông tin đăng nhập (username/password) đến Server thông qua API POST /login.
+
+🔁 Bước 2: Server kiểm tra thông tin
+Server xác minh thông tin đăng nhập (so sánh với cơ sở dữ liệu).
+
+Nếu hợp lệ, server sẽ tạo JWT chứa thông tin người dùng (ví dụ: user_id, role, exp...) và ký token bằng secret key hoặc private key.
+
+🔁 Bước 3: Server gửi JWT về cho client
+JWT được trả về trong response (thường nằm trong body hoặc header).
+
+Client lưu trữ JWT, thường là:
+
+LocalStorage (web)
+
+SecureStorage (mobile)
+
+HttpOnly Cookie (tăng bảo mật)
+
+🔁 Bước 4: Client gửi yêu cầu kèm JWT
+Khi cần truy cập tài nguyên bảo vệ (protected route), client gửi HTTP request đến server (GET, POST, v.v.) và đính kèm JWT trong header:
+
+
+Authorization: Bearer <token>
+🔁 Bước 5: Server kiểm tra và xác thực JWT
+Server nhận request và:
+
+Giải mã JWT (decode).
+
+Xác thực chữ ký (signature) để đảm bảo token không bị chỉnh sửa.
+
+Kiểm tra các claim như:
+
+exp: token hết hạn chưa?
+
+iss, aud: token thuộc đúng nguồn không?
+
+🔁 Bước 6: Server phản hồi
+Nếu JWT hợp lệ: server xử lý yêu cầu và gửi dữ liệu/response về cho client.
+
+Nếu JWT không hợp lệ hoặc hết hạn: server trả về mã lỗi 401 Unauthorized hoặc 403 Forbidden.
+
+🧩 Tóm tắt vai trò của từng bước:
+Bước	Vai trò
+B1	Thu thập thông tin xác thực ban đầu từ người dùng.
+B2	Xác minh thông tin đăng nhập và tạo token an toàn.
+B3	Truyền JWT về client để sử dụng trong các lần truy cập sau.
+B4	Client gửi yêu cầu có đính kèm token để được ủy quyền.
+B5	Server kiểm tra tính hợp lệ của token và xác thực người dùng.
+B6	Phản hồi dữ liệu tương ứng hoặc lỗi bảo mật.
